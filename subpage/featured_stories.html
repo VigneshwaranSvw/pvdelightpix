@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <title>Wedding Segment | PV Delight Pix</title>
+
+    <meta name="description" content="Browse wedding stories photographed by PV Delight Pix across Dharmapuri, Tamil Nadu and nearby destinations." />
+    <meta name="author" content="PV Delight Pix" />
+
+    <link rel="shortcut icon" href="../img/fav.png" />
+
+    <!-- Fonts & CSS already used on site -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/plugins.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <style>
+        /* Hero */
+        .pages-header {
+            height: 55vh;
+            min-height: 420px;
+        }
+        .pages-header .cont h1 {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            font-size: 46px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        /* Breadcrumb under hero */
+        .gallery-breadcrumb {
+            background: #ffffff;
+            border-bottom: 1px solid #eceff1;
+        }
+        .gallery-breadcrumb-inner {
+            text-align: center;
+            padding: 12px 0 10px;
+            font-size: 12px;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: #9ca3af;
+        }
+        .gallery-breadcrumb-inner a {
+            color: #6b7280;
+        }
+        .gallery-breadcrumb-inner a:hover {
+            color: #111827;
+        }
+        .gallery-breadcrumb-inner .sep {
+            margin: 0 8px;
+            color: #d1d5db;
+        }
+
+        /* Section heading */
+        .gallery-heading {
+            padding: 50px 0 25px;
+            text-align: center;
+        }
+        .gallery-heading h6 {
+            font-size: 12px;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-bottom: 5px;
+        }
+        .gallery-heading h2 {
+            font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 26px;
+            letter-spacing: .04em;
+            /*text-transform: uppercase;*/
+        }
+
+        /* Grid */
+        .wedding-grid {
+            padding-bottom: 0px;
+        }
+        .wedding-card {
+            margin-bottom: 40px;
+        }
+        .wedding-thumb {
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+        }
+        .wedding-thumb img {
+            width: 100%;
+            display: block;
+            transition: transform .4s ease;
+        }
+
+        /* Hover overlay + text */
+        .wedding-thumb-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.05), rgba(0,0,0,0.55));
+            opacity: 0;
+            transition: opacity .3s ease;
+        }
+        .wedding-thumb-content {
+            position: absolute;
+            bottom: 18px;
+            left: 18px;
+            right: 18px;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity .3s ease, transform .3s ease;
+        }
+        .wedding-thumb-content h4 {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+        .wedding-thumb-content span {
+            font-size: 12px;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+
+        .wedding-card:hover .wedding-thumb img {
+            transform: scale(1.05);
+        }
+        .wedding-card:hover .wedding-thumb-overlay {
+            opacity: 1;
+        }
+        .wedding-card:hover .wedding-thumb-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Title under cards */
+        .wedding-card-title {
+            text-align: center;
+            margin-top: 14px;
+        }
+        .wedding-card-title h5 {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+        .wedding-card-title span {
+            font-size: 12px;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar (same as homepage) -->
+<nav class="navbar change navbar-expand-lg">
+    <div class="container">
+      <a class="logo" href="../index.html">
+          <img src="img/pv_delight_pix-logo.jpg" style="width:200px" alt="PV Delight Pix logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="icon-bar"><i class="fas fa-bars"></i></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
+            <li class="nav-item active"><a class="nav-link" href="featured_stories.html">Gallery</a></li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Services</a>
+              <div class="dropdown-menu">
+                  <a class="dropdown-item" href="featured_stories.html#wedding-segment">Wedding</a>
+                  <a class="dropdown-item" href="featured_stories.html#prewedding-segment">Pre Wedding</a>
+                  <a class="dropdown-item" href="featured_stories.html#engagement-segment">Engagement</a>
+                  <a class="dropdown-item" href="featured_stories.html#maternity-segment">Maternity Shoot</a>
+                  <a class="dropdown-item" href="featured_stories.html#events-family-segment">Event Photography</a>
+                  <a class="dropdown-item" href="featured_stories.html#events-family-segment">Family Shoot</a>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Other Services</a>
+              <div class="dropdown-menu">
+                  <a class="dropdown-item" href="../shoot/best-studio.html">Best Photo Studio</a>
+                  <a class="dropdown-item" href="../shoot/maternity-shoot.html">Maternity Photoshoot</a>
+                  <a class="dropdown-item" href="../shoot/birthday-shoot.html">Birthday Photoshoot</a>
+                  <a class="dropdown-item" href="../shoot/baby-shower-shoot.html">Baby Shower</a>
+                  <a class="dropdown-item" href="../shoot/wedding-shoot.html">Wedding Photography</a>
+                  <a class="dropdown-item" href="../shoot/pre-wedding-shoot.html">Pre Wedding Photography</a>
+                  <a class="dropdown-item" href="../shoot/engagement-shoot.html">Engagement Photography</a>
+                  <a class="dropdown-item" href="../shoot/family_photography-shoot.html">Family Photography Studio</a>
+              </div>
+            </li>
+
+            <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+          </ul>
+          <div class="social-icon">
+              <a href="https://www.facebook.com/pvdelightpics/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.youtube.com/@pvdelightpix6354" target="_blank"><i class="fab fa-youtube"></i></a>
+              <a href="https://www.instagram.com/pvdelightpix/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+      </div>
+    </div>
+</nav>
+
+<!-- Hero -->
+<header class="pages-header bg-img valign" data-background="../img/slid/new/3.jpg" data-overlay-dark="5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="cont text-center">
+                    <h1>Featured Stories</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="gallery-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="gallery-breadcrumb-inner">
+                    <a href="../index.html">Home</a>
+                    <span class="sep">/</span>
+                    <span>Featured Stories</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Heading: Wedding Segment -->
+<section id="wedding-segment" class="gallery-heading">
+  <div class="container">
+    <!-- <h6>PV Delight Pix</h6> -->
+    <h2>Wedding Segment</h2>
+  </div>
+</section>
+
+<!-- Wedding Grid -->
+<section class="wedding-grid">
+  <div class="container">
+    <div class="row">
+        <div class="col-md-4 wedding-card">
+        <a href="our-galleries.html#wedding">
+          <div class="wedding-thumb">
+            <img src="../img/blog/s04.jpg" alt="Rooftop Engagement">
+            <div class="wedding-thumb-overlay"></div>
+            <!-- <div class="wedding-thumb-content">
+              <h4>Priya &amp; Vivek</h4>
+              <span>Rooftop Session</span>
+            </div> -->
+          </div>
+        </a>
+        <div class="wedding-card-title">
+          <!-- <h5>Priya &amp; Vivek</h5> -->
+          <span>Engagement</span>
+        </div>
+        </div>
+        <div class="col-md-4 wedding-card">
+            <a href="our-galleries.html#wedding">
+                <div class="wedding-thumb">
+                    <img src="../img/blog/s01.jpg" alt="Ritika &amp; Yash">
+                    <div class="wedding-thumb-overlay"></div>
+                    <div class="wedding-thumb-content">
+                        <!-- <h4>Ritika &amp; Yash</h4> -->
+                        <!-- <span>Turf Club, Pune</span> -->
+                    </div>
+                </div>
+            </a>
+            <div class="wedding-card-title">
+                <!-- <h5>Ritika &amp; Yash</h5> -->
+                <span>Wedding Couple</span>
+            </div>
+        </div>
+        <div class="col-md-4 wedding-card">
+            <a href="our-galleries.html#wedding">
+                <div class="wedding-thumb">
+                    <img src="../img/blog/s02.jpg" alt="Ankita &amp; Vivan">
+                    <div class="wedding-thumb-overlay"></div>
+                    <div class="wedding-thumb-content">
+                        <!-- <h4>Ankita &amp; Vivan</h4> -->
+                        <!-- <span>Dharmapuri Wedding</span> -->
+                    </div>
+                </div>
+            </a>
+            <div class="wedding-card-title">
+                <!-- <h5>Ankita &amp; Vivan</h5> -->
+                <span>Wedding Couple</span>
+            </div>
+        </div>
+        <!-- <div class="col-md-4 wedding-card">
+            <a href="our-galleries.html#wedding">
+                <div class="wedding-thumb">
+                    <img src="../img/blog/s03.jpg" alt="Aashna &amp; Soham">
+                    <div class="wedding-thumb-overlay"></div>
+                    <div class="wedding-thumb-content">
+                        <h4>Aashna &amp; Soham</h4>
+                        <span>Outdoor Ceremony</span>
+                    </div>
+                </div>
+            </a>
+            <div class="wedding-card-title">
+                <h5>Aashna &amp; Soham</h5>
+                <span>Wedding Couple</span>
+            </div>
+        </div> -->
+        <!-- Duplicate blocks below for more couples -->
+        <!-- <div class="col-md-4 wedding-card">
+            <a href="our-galleries.html#wedding">
+                <div class="wedding-thumb">
+                    <img src="../img/blog/s04.jpg" alt="Ritika &amp; Yash">
+                    <div class="wedding-thumb-overlay"></div>
+                    <div class="wedding-thumb-content">
+                        <h4>Ritika &amp; Yash</h4>
+                        <span>Turf Club, Pune</span>
+                    </div>
+                </div>
+            </a>
+            <div class="wedding-card-title">
+                <h5>Ritika &amp; Yash</h5>
+                <span>Wedding Couple</span>
+            </div>
+        </div>
+        <div class="col-md-4 wedding-card">
+            <a href="our-galleries.html#wedding">
+                <div class="wedding-thumb">
+                    <img src="../img/blog/s05.jpg" alt="Ankita &amp; Vivan">
+                    <div class="wedding-thumb-overlay"></div>
+                    <div class="wedding-thumb-content">
+                        <h4>Ankita &amp; Vivan</h4>
+                        <span>Dharmapuri Wedding</span>
+                    </div>
+                </div>
+            </a>
+            <div class="wedding-card-title">
+                <h5>Ankita &amp; Vivan</h5>
+                <span>Wedding Couple</span>
+            </div>
+        </div> -->
+    </div>
+    </div>
+</section>
+
+<!-- Heading: Pre Wedding -->
+<section id="prewedding-segment" class="gallery-heading" style="padding-top:20px;">
+  <div class="container">
+    <!-- <h6>PV Delight Pix</h6> -->
+    <h2>Pre‑Wedding Stories</h2>
+  </div>
+</section>
+
+<section class="wedding-grid">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-4 wedding-card">
+        <a href="our-galleries.html#pre-wedding">
+          <div class="wedding-thumb">
+            <img src="../img/blog/s04.jpg" alt="Lakeside Pre‑Wedding">
+            <div class="wedding-thumb-overlay"></div>
+            <div class="wedding-thumb-content">
+              <!-- <h4>Meera &amp; Arjun</h4> -->
+              <!-- <span>Lakeside Pre‑Wedding</span> -->
+            </div>
+          </div>
+        </a>
+        <div class="wedding-card-title">
+          <!-- <h5>Meera &amp; Arjun</h5> -->
+          <span>Pre‑Wedding</span>
+        </div>
+      </div>
+      <div class="col-md-4 wedding-card">
+        <a href="our-galleries.html#pre-wedding">
+          <div class="wedding-thumb">
+            <img src="../img/blog/s05.jpg" alt="Temple Town Session">
+            <div class="wedding-thumb-overlay"></div>
+            <div class="wedding-thumb-content">
+              <!-- <h4>Sanjana &amp; Karthik</h4> -->
+              <!-- <span>Temple Town Session</span> -->
+            </div>
+          </div>
+        </a>
+        <div class="wedding-card-title">
+          <!-- <h5>Sanjana &amp; Karthik</h5> -->
+          <span>Pre‑Wedding</span>
+        </div>
+      </div>
+      <div class="col-md-4 wedding-card">
+        <a href="our-galleries.html#pre-wedding">
+          <div class="wedding-thumb">
+            <img src="../img/blog/s6.jpg" alt="Hillside Evening">
+            <div class="wedding-thumb-overlay"></div>
+            <div class="wedding-thumb-content">
+              <!-- <h4>Divya &amp; Naveen</h4> -->
+              <!-- <span>Hillside Evening</span> -->
+            </div>
+          </div>
+        </a>
+        <div class="wedding-card-title">
+          <!-- <h5>Divya &amp; Naveen</h5> -->
+          <span>Pre‑Wedding</span>
+        </div>
+      </div>
+      <!-- <div class="col-md-4 wedding-card">
+        <a href="our-galleries.html#pre-wedding">
+          <div class="wedding-thumb">
+            <img src="../img/blog/s04.jpg" alt="Hillside Evening">
+            <div class="wedding-thumb-overlay"></div>
+            <div class="wedding-thumb-content">
+              <h4>Divya &amp; Naveen</h4>
+              <span>Hillside Evening</span>
+            </div>
+          </div>
+        </a>
+        <div class="wedding-card-title">
+          <h5>Divya &amp; Naveen</h5>
+          <span>Pre‑Wedding</span>
+        </div>
+      </div>
+      <div class="col-md-4 wedding-card">
+        <a href="our-galleries.html#pre-wedding">
+          <div class="wedding-thumb">
+            <img src="../img/blog/s9.jpg" alt="Hillside Evening">
+            <div class="wedding-thumb-overlay"></div>
+            <div class="wedding-thumb-content">
+              <h4>Divya &amp; Naveen</h4>
+              <span>Hillside Evening</span>
+            </div>
+          </div>
+        </a>
+        <div class="wedding-card-title">
+          <h5>Divya &amp; Naveen</h5>
+          <span>Pre‑Wedding</span>
+        </div>
+      </div>
+      <div class="col-md-4 wedding-card">
+        <a href="our-galleries.html#pre-wedding">
+          <div class="wedding-thumb">
+            <img src="../img/blog/s10.jpg" alt="Hillside Evening">
+            <div class="wedding-thumb-overlay"></div>
+            <div class="wedding-thumb-content">
+              <h4>Divya &amp; Naveen</h4>
+              <span>Hillside Evening</span>
+            </div>
+          </div>
+        </a>
+        <div class="wedding-card-title">
+          <h5>Divya &amp; Naveen</h5>
+          <span>Pre‑Wedding</span>
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+</section>
+
+<!-- Heading: Engagement -->
+<section id="engagement-segment" class="gallery-heading" style="padding-top:20px;">
+  <div class="container">
+    <!-- <h6>PV Delight Pix</h6> -->
+    <h2>Engagement Moments</h2>
+  </div>
+</section>
+
+<section class="wedding-grid">
+  <div class="container">
+    <div class="row">
+        <div class="col-md-4 wedding-card">
+        <a href="our-galleries.html#engagement">
+          <div class="wedding-thumb">
+            <img src="../img/blog/s04.jpg" alt="Rooftop Engagement">
+            <div class="wedding-thumb-overlay"></div>
+            <div class="wedding-thumb-content">
+              <!-- <h4>Priya &amp; Vivek</h4> -->
+              <!-- <span>Rooftop Session</span> -->
+            </div>
+          </div>
+        </a>
+        <div class="wedding-card-title">
+          <!-- <h5>Priya &amp; Vivek</h5> -->
+          <span>Engagement</span>
+        </div>
+        </div>
+        <div class="col-md-4 wedding-card">
+            <a href="our-galleries.html#engagement">
+                <div class="wedding-thumb">
+                    <img src="../img/blog/s01.jpg" alt="Ritika &amp; Yash">
+                    <div class="wedding-thumb-overlay"></div>
+                    <div class="wedding-thumb-content">
+                        <!-- <h4>Ritika &amp; Yash</h4> -->
+                        <!-- <span>Turf Club, Pune</span> -->
+                    </div>
+                </div>
+            </a>
+            <div class="wedding-card-title">
+                <!-- <h5>Ritika &amp; Yash</h5> -->
+                <span>Wedding Couple</span>
+            </div>
+        </div>
+        <div class="col-md-4 wedding-card">
+            <a href="our-galleries.html#engagement">
+                <div class="wedding-thumb">
+                    <img src="../img/blog/s02.jpg" alt="Ankita &amp; Vivan">
+                    <div class="wedding-thumb-overlay"></div>
+                    <div class="wedding-thumb-content">
+                        <!-- <h4>Ankita &amp; Vivan</h4> -->
+                        <!-- <span>Dharmapuri Wedding</span> -->
+                    </div>
+                </div>
+            </a>
+            <div class="wedding-card-title">
+                <!-- <h5>Ankita &amp; Vivan</h5> -->
+                <span>Wedding Couple</span>
+            </div>
+        </div>
+        <!-- <div class="col-md-4 wedding-card">
+            <a href="our-galleries.html#engagement">
+                <div class="wedding-thumb">
+                    <img src="../img/blog/s03.jpg" alt="Aashna &amp; Soham">
+                    <div class="wedding-thumb-overlay"></div>
+                    <div class="wedding-thumb-content">
+                        <h4>Aashna &amp; Soham</h4>
+                        <span>Outdoor Ceremony</span>
+                    </div>
+                </div>
+            </a>
+            <div class="wedding-card-title">
+                <h5>Aashna &amp; Soham</h5>
+                <span>Wedding Couple</span>
+            </div>
+        </div> -->
+        <!-- Duplicate blocks below for more couples -->
+        <!-- <div class="col-md-4 wedding-card">
+            <a href="our-galleries.html#engagement">
+                <div class="wedding-thumb">
+                    <img src="../img/blog/s04.jpg" alt="Ritika &amp; Yash">
+                    <div class="wedding-thumb-overlay"></div>
+                    <div class="wedding-thumb-content">
+                        <h4>Ritika &amp; Yash</h4>
+                        <span>Turf Club, Pune</span>
+                    </div>
+                </div>
+            </a>
+            <div class="wedding-card-title">
+                <h5>Ritika &amp; Yash</h5>
+                <span>Wedding Couple</span>
+            </div>
+        </div>
+        <div class="col-md-4 wedding-card">
+            <a href="our-galleries.html#engagement">
+                <div class="wedding-thumb">
+                    <img src="../img/blog/s05.jpg" alt="Ankita &amp; Vivan">
+                    <div class="wedding-thumb-overlay"></div>
+                    <div class="wedding-thumb-content">
+                        <h4>Ankita &amp; Vivan</h4>
+                        <span>Dharmapuri Wedding</span>
+                    </div>
+                </div>
+            </a>
+            <div class="wedding-card-title">
+                <h5>Ankita &amp; Vivan</h5>
+                <span>Wedding Couple</span>
+            </div>
+        </div> -->
+    </div>
+  </div>
+</section>
+
+<!-- Heading: Maternity -->
+<section id="maternity-segment" class="gallery-heading" style="padding-top:20px;">
+  <div class="container">
+    <!-- <h6>PV Delight Pix</h6> -->
+    <h2>Maternity &amp; Baby</h2>
+  </div>
+</section>
+
+<section class="wedding-grid">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-4 wedding-card">
+        <a href="our-galleries.html#maternity">
+          <div class="wedding-thumb">
+            <img src="../img/blog/s04.jpg" alt="Studio Maternity">
+            <div class="wedding-thumb-overlay"></div>
+            <div class="wedding-thumb-content">
+              <h4>Studio Glow</h4>
+              <span>Maternity Indoor</span>
+            </div>
+          </div>
+        </a>
+        <div class="wedding-card-title">
+          <h5>Studio Glow</h5>
+          <span>Maternity</span>
+        </div>
+      </div>
+
+      <div class="col-md-4 wedding-card">
+        <a href="our-galleries.html#maternity">
+          <div class="wedding-thumb">
+            <img src="../img/blog/s05.jpg" alt="Outdoor Maternity">
+            <div class="wedding-thumb-overlay"></div>
+            <div class="wedding-thumb-content">
+              <h4>Golden Hour</h4>
+              <span>Maternity Outdoor</span>
+            </div>
+          </div>
+        </a>
+        <div class="wedding-card-title">
+          <h5>Golden Hour</h5>
+          <span>Maternity</span>
+        </div>
+      </div>
+
+      <div class="col-md-4 wedding-card">
+        <a href="our-galleries.html#maternity">
+          <div class="wedding-thumb">
+            <img src="../img/blog/s6.jpg" alt="Baby Indoor">
+            <div class="wedding-thumb-overlay"></div>
+            <div class="wedding-thumb-content">
+              <h4>Little Stories</h4>
+              <span>Baby Indoor</span>
+            </div>
+          </div>
+        </a>
+        <div class="wedding-card-title">
+          <h5>Little Stories</h5>
+          <span>Baby</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Heading: Events & Family -->
+<section id="events-family-segment" class="gallery-heading" style="padding-top:20px;">
+  <div class="container">
+    <!-- <h6>PV Delight Pix</h6> -->
+    <h2>Events &amp; Family Sessions</h2>
+  </div>
+</section>
+
+<section class="wedding-grid">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-4 wedding-card">
+        <a href="our-galleries.html#events">
+          <div class="wedding-thumb">
+            <img src="../img/blog/s04.jpg" alt="Birthday Event">
+            <div class="wedding-thumb-overlay"></div>
+            <div class="wedding-thumb-content">
+              <h4>First Birthday</h4>
+              <span>Birthday Event</span>
+            </div>
+          </div>
+        </a>
+        <div class="wedding-card-title">
+          <h5>First Birthday</h5>
+          <span>Event</span>
+        </div>
+      </div>
+      <div class="col-md-4 wedding-card">
+        <a href="our-galleries.html#events">
+          <div class="wedding-thumb">
+            <img src="../img/blog/s9.jpg" alt="Family Shoot">
+            <div class="wedding-thumb-overlay"></div>
+            <div class="wedding-thumb-content">
+              <h4>The Family Table</h4>
+              <span>Family Shoot</span>
+            </div>
+          </div>
+        </a>
+        <div class="wedding-card-title">
+          <h5>The Family Table</h5>
+          <span>Family</span>
+        </div>
+      </div>
+      <div class="col-md-4 wedding-card">
+        <a href="our-galleries.html#events">
+          <div class="wedding-thumb">
+            <img src="../img/blog/s03.jpg" alt="Family Shoot">
+            <div class="wedding-thumb-overlay"></div>
+            <div class="wedding-thumb-content">
+              <h4>The Family Table</h4>
+              <span>Family Shoot</span>
+            </div>
+          </div>
+        </a>
+        <div class="wedding-card-title">
+          <h5>The Family Table</h5>
+          <span>Family</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Map + footer (reuse as on other pages) -->
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.1499365829036!2d78.1446814!3d12.101886199999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bac17a20b264a95%3A0x8250b266d8216184!2sPV%20DELIGHT%20PIX!5e0!3m2!1sen!2sin!4v1763812154382!5m2!1sen!2sin"
+        width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+<footer class="main-footer dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="item abot">
+                    <div class="logo-footer mb-20">
+                        <a href="#0" class="logo">
+                            <img src="img/pv_delight_pix-logo.jpg" style="width: 155px;" alt="footerLogo">
+                        </a>
+                    </div>
+                    <div class="social-icon">
+                        <a href="https://www.facebook.com/pvdelightpics/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.youtube.com/@pvdelightpix6354" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/pvdelightpix/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="item usful-links">
+                    <div class="fothead">
+                        <h6>Useful Links</h6>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-chevron-right"></i> <a href="../shoot/wedding-shoot.html">Wedding Photography</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="../shoot/pre-wedding-shoot.html">Pre Wedding</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="../shoot/engagement-shoot.html">Engagement Photoshoot</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="../shoot/maternity-shoot.html">Maternity Shoot</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="../shoot/event-photography-shoot.html">Event Photography</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="item usful-links">
+                   
+                    <div class="item usful-links">
+                    <div class="fothead">
+                        <h6>Contact Us</h6>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-chevron-right"></i> <a href="tel:9677992818">Mobile No  : +91 9677992818 </a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="tel:9677992818">Mobile No  : +91 9677992818</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="mailto:pvdelightpix@gmail.com">Mail Us : pvdelightpix@gmail.com</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="#0">Address : A.Complex, Govt. Arts College, N.M, Salem Main Rd, Dharmapuri, Tamil Nadu 636705.</a></li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="text-center" style="margin-bottom:0px;"> <a href="#" target="blank" style="color:#FFF;pointer-events: none;">© 2025 PV DELIGHT PIX. All Rights Reserved</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="../js/jquery-3.0.0.min.js"></script>
+<script src="../js/jquery-migrate-3.0.0.min.js"></script>
+<script src="../js/plugins.js"></script>
+<script src="../js/scripts.js"></script>
+
+</body>
+</html>

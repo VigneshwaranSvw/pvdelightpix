@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <title>Ritika &amp; Yash | PV Delight Pix</title>
+
+    <!-- Fonts & Core CSS (same as new theme) -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/plugins.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <!-- Fancybox for lightbox -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+    <style>
+        /* ===== Hero ===== */
+        .story-hero {
+            position: relative;
+            height: 70vh;
+            min-height: 460px;
+        }
+        .story-hero .bg-img {
+            height: 100%;
+        }
+        .story-hero .overlay-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.7));
+        }
+        .story-hero .hero-inner {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 80px;
+            text-align: center;
+            color: #fff;
+        }
+        .story-hero .hero-inner h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 40px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .story-hero .hero-inner span {
+            font-size: 13px;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+        }
+
+        /* ===== Intro ===== */
+        .story-intro {
+            background: #f6f2ee;
+            padding: 60px 0 40px;
+        }
+        .story-intro .container {
+            max-width: 980px;
+        }
+        .story-intro h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            text-align: center;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .story-intro h5 {
+            text-align: center;
+            font-size: 13px;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            color: #9ca3af;
+        }
+        .story-intro p {
+            font-size: 14px;
+            line-height: 1.9;
+            color: #444;
+            text-align: center;
+        }
+
+        /* ===== Collage Grid ===== */
+        .story-grid-wrapper {
+            background: #f6f2ee;
+            padding-bottom: 70px;
+        }
+        .story-grid {
+            max-width: 1150px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 220px;
+            gap: 10px;
+        }
+
+        .story-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 6px;
+        }
+        .story-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .story-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transform: scale(1);
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+
+        /* overlay */
+        .story-img-wrap::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.35);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* magnifier */
+        .story-zoom-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.85);
+            background: rgba(0,0,0,0.45);          /* NEW: dark translucent bg */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;                        /* keep icon white */
+            font-size: 20px;
+            opacity: 0;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.35); /* soft glow for contrast */
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        /* slightly adjust only wide tiles if needed */
+        .story-item.wide .story-zoom-icon {
+            top: 30%;
+        }
+
+        .story-item:hover .story-img-wrap::before { opacity: 1; }
+        .story-item:hover img {
+            transform: scale(1.03);
+            filter: saturate(1.05);
+        }
+        .story-item:hover .story-zoom-icon {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* collage shapes */
+        .story-item.wide { grid-column: span 2; }
+        .story-item.tall { grid-row: span 2; }
+        .story-item.big  { grid-column: span 2; grid-row: span 2; }
+
+        @media (max-width: 992px) {
+            .story-grid { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 200px; }
+        }
+        @media (max-width: 768px) {
+            .story-hero { height: 60vh; min-height: 420px; }
+            .story-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
+        }
+        @media (max-width: 575px) {
+            .story-grid { grid-template-columns: 1fr; grid-auto-rows: 220px; }
+        }
+
+        /* ===== Bottom CTA ===== */
+        /*.story-cta.call-action {
+            padding: 70px 0;
+        }
+        .story-cta h6 {
+            font-size: 12px;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+        }
+        .story-cta h2 span {
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: .08em;
+        }*/
+        /* Keep navbar above Fancybox and other overlays on this page */
+        .navbar.change {
+            z-index: 9999 !important;
+        }
+        .navbar.change.nav-scroll {
+            z-index: 9999 !important;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar (same as homepage) -->
+
+<nav class="navbar change navbar-expand-lg">
+    <div class="container">
+      <a class="logo" href="../index.html">
+          <img src="img/pv_delight_pix-logo.jpg" style="width:200px" alt="PV Delight Pix logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="icon-bar"><i class="fas fa-bars"></i></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
+
+              <li class="nav-item active">
+                  <a class="nav-link" href="featured_stories.html#wedding-segment">Gallery</a>
+              </li>
+
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Services</a>
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" href="featured_stories.html#wedding-segment">Wedding</a>
+                      <a class="dropdown-item" href="featured_stories.html#prewedding-segment">Pre Wedding</a>
+                      <a class="dropdown-item" href="featured_stories.html#engagement-segment">Engagement</a>
+                      <a class="dropdown-item" href="featured_stories.html#maternity-segment">Maternity Shoot</a>
+                      <a class="dropdown-item" href="featured_stories.html#events-family-segment">Event Photography</a>
+                      <a class="dropdown-item" href="featured_stories.html#events-family-segment">Family Shoot</a>
+                  </div>
+              </li>
+
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Other Services</a>
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" href="../shoot/best-studio.html">Best Photo Studio</a>
+                      <a class="dropdown-item" href="../shoot/maternity-shoot.html">Maternity Photoshoot</a>
+                      <a class="dropdown-item" href="../shoot/birthday-shoot.html">Birthday Photoshoot</a>
+                      <a class="dropdown-item" href="../shoot/baby-shower-shoot.html">Baby Shower</a>
+                      <a class="dropdown-item" href="../shoot/wedding-shoot.html">Wedding Photography</a>
+                      <a class="dropdown-item" href="../shoot/pre-wedding-shoot.html">Pre Wedding Photography</a>
+                      <a class="dropdown-item" href="../shoot/engagement-shoot.html">Engagement Photography</a>
+                      <a class="dropdown-item" href="../shoot/family_photography-shoot.html">Family Photography Studio</a>
+                  </div>
+              </li>
+
+              <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+          </ul>
+          <div class="social-icon">
+              <a href="https://www.facebook.com/pvdelightpics/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.youtube.com/@pvdelightpix6354" target="_blank"><i class="fab fa-youtube"></i></a>
+              <a href="https://www.instagram.com/pvdelightpix/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+      </div>
+    </div>
+</nav>
+
+<!-- Hero -->
+
+<!-- ==============================================
+     1. WEDDING STORIES
+     ============================================== -->
+<div id="wedding">
+    <header class="story-hero">
+        <div class="bg-img" data-background="../img/blog/hero_wedding.png"></div>
+        <div class="overlay-gradient"></div>
+        <div class="hero-inner">
+            <h1>Wedding Stories</h1>
+            <span>Grand Celebrations & Traditions</span>
+        </div>
+    </header>
+
+    <section class="story-intro">
+        <div class="container">
+            <h2>Wedding Stories</h2>
+            <h5>Honoring Love & Heritage</h5>
+            <p>A grand celebration of love honoring traditions and family heritage. We capture the overwhelming joy, the intricate vibrant rituals, and the spectacular emotional moments that bring families together on your most important day.</p>
+        </div>
+    </section>
+
+    <section class="story-grid-wrapper">
+        <div class="story-grid">
+            <div class="story-item big">
+                <a href="../img/blog/grid_wed_1.png" data-fancybox="wedding" data-caption="A Beautiful Wedding Tradition">
+                    <div class="story-img-wrap"><img src="../img/blog/grid_wed_1.png" alt="Wedding Tradition"><span class="story-zoom-icon"><i class="fas fa-search"></i></span></div>
+                </a>
+            </div>
+            <div class="story-item wide">
+                <a href="../img/blog/s01.jpg" data-fancybox="wedding">
+                    <div class="story-img-wrap"><img src="../img/blog/s01.jpg" alt=""><span class="story-zoom-icon"><i class="fas fa-search"></i></span></div>
+                </a>
+            </div>
+            <div class="story-item tall">
+                <a href="../img/2.jpg" data-fancybox="wedding">
+                    <div class="story-img-wrap"><img src="../img/2.jpg" alt=""><span class="story-zoom-icon"><i class="fas fa-search"></i></span></div>
+                </a>
+            </div>
+            <div class="story-item">
+                <a href="../img/blog/s02.jpg" data-fancybox="wedding">
+                    <div class="story-img-wrap"><img src="../img/blog/s02.jpg" alt=""><span class="story-zoom-icon"><i class="fas fa-search"></i></span></div>
+                </a>
+            </div>
+            <div class="story-item">
+                <a href="../img/blog/hero_wedding.png" data-fancybox="wedding">
+                    <div class="story-img-wrap"><img src="../img/blog/hero_wedding.png" alt=""><span class="story-zoom-icon"><i class="fas fa-search"></i></span></div>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==============================================
+     2. PRE-WEDDING
+     ============================================== -->
+<div id="pre-wedding">
+    <header class="story-hero">
+        <div class="bg-img" data-background="../img/blog/hero_prewedding.png"></div>
+        <div class="overlay-gradient"></div>
+        <div class="hero-inner">
+            <h1>Pre-Wedding</h1>
+            <span>Beautiful Destinations</span>
+        </div>
+    </header>
+
+    <section class="story-intro">
+        <div class="container">
+            <h2>Pre-Wedding</h2>
+            <h5>Romantic Destinations</h5>
+            <p>Capturing the pure romance before the big day, in striking outdoor destinations and landscapes. A relaxed, intimate showcase of simply you and your partner celebrating the anticipation.</p>
+        </div>
+    </section>
+
+    <section class="story-grid-wrapper">
+        <div class="story-grid">
+            <div class="story-item big">
+                <a href="../img/blog/grid_pre_1.png" data-fancybox="pre-wedding" data-caption="Destination Pre-Wedding">
+                    <div class="story-img-wrap"><img src="../img/blog/grid_pre_1.png" alt="Pre-Wedding"><span class="story-zoom-icon"><i class="fas fa-search"></i></span></div>
+                </a>
+            </div>
+            <div class="story-item wide">
+                <a href="../img/blog/hero_prewedding.png" data-fancybox="pre-wedding">
+                    <div class="story-img-wrap"><img src="../img/blog/hero_prewedding.png" alt=""><span class="story-zoom-icon"><i class="fas fa-search"></i></span></div>
+                </a>
+            </div>
+            <div class="story-item tall">
+                <a href="../img/blog/grid_pre_2.png" data-fancybox="pre-wedding">
+                    <div class="story-img-wrap"><img src="../img/blog/grid_pre_2.png" alt=""><span class="story-zoom-icon"><i class="fas fa-search"></i></span></div>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==============================================
+     3. ENGAGEMENT
+     ============================================== -->
+<div id="engagement">
+    <header class="story-hero">
+        <div class="bg-img" data-background="../img/blog/hero_engagement.png"></div>
+        <div class="overlay-gradient"></div>
+        <div class="hero-inner">
+            <h1>Engagements</h1>
+            <span>Starting the Journey</span>
+        </div>
+    </header>
+
+    <section class="story-intro">
+        <div class="container">
+            <h2>Engagements</h2>
+            <h5>Starting the Journey</h5>
+            <p>The beautiful beginning of forever. We capture the magic and anticipation of your engagement, whether it's an intimate proposal or an elaborately planned rooftop session.</p>
+        </div>
+    </section>
+
+    <section class="story-grid-wrapper">
+        <div class="story-grid">
+            <div class="story-item big">
+                <a href="../img/blog/grid_eng_1.png" data-fancybox="engagement" data-caption="Golden Hour Engagement">
+                    <div class="story-img-wrap"><img src="../img/blog/grid_eng_1.png" alt="Engagement"><span class="story-zoom-icon"><i class="fas fa-search"></i></span></div>
+                </a>
+            </div>
+            <div class="story-item tall">
+                <a href="../img/blog/grid_eng_2.png" data-fancybox="engagement">
+                    <div class="story-img-wrap"><img src="../img/blog/grid_eng_2.png" alt=""><span class="story-zoom-icon"><i class="fas fa-search"></i></span></div>
+                </a>
+            </div>
+            <div class="story-item">
+                <a href="../img/blog/hero_engagement.png" data-fancybox="engagement">
+                    <div class="story-img-wrap"><img src="../img/blog/hero_engagement.png" alt=""><span class="story-zoom-icon"><i class="fas fa-search"></i></span></div>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==============================================
+     4. MATERNITY & BABY
+     ============================================== -->
+<div id="maternity">
+    <header class="story-hero">
+        <div class="bg-img" data-background="../img/blog/hero_maternity.png"></div>
+        <div class="overlay-gradient"></div>
+        <div class="hero-inner">
+            <h1>Maternity & Baby</h1>
+            <span>Milestone Memories</span>
+        </div>
+    </header>
+
+    <section class="story-intro">
+        <div class="container">
+            <h2>Maternity Series</h2>
+            <h5>Studio Glow & Newborns</h5>
+            <p>A beautiful, intimate studio session capturing the remarkable glow of motherhood. Using soft lighting and elegant backdrops to emphasize the pure emotion of bringing new life into the world.</p>
+        </div>
+    </section>
+
+    <section class="story-grid-wrapper">
+        <div class="story-grid">
+            <div class="story-item big">
+                <a href="../img/blog/grid_mat_1.png" data-fancybox="maternity" data-caption="Studio Maternity Glow">
+                    <div class="story-img-wrap"><img src="../img/blog/grid_mat_1.png" alt="Maternity"><span class="story-zoom-icon"><i class="fas fa-search"></i></span></div>
+                </a>
+            </div>
+            <div class="story-item tall">
+                <a href="../img/blog/grid_mat_2.png" data-fancybox="maternity">
+                    <div class="story-img-wrap"><img src="../img/blog/grid_mat_2.png" alt=""><span class="story-zoom-icon"><i class="fas fa-search"></i></span></div>
+                </a>
+            </div>
+            <div class="story-item wide">
+                <a href="../img/blog/hero_maternity.png" data-fancybox="maternity">
+                    <div class="story-img-wrap"><img src="../img/blog/hero_maternity.png" alt=""><span class="story-zoom-icon"><i class="fas fa-search"></i></span></div>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==============================================
+     5. EVENTS & FAMILY
+     ============================================== -->
+<div id="events">
+    <header class="story-hero">
+        <div class="bg-img" data-background="../img/blog/hero_family.png"></div>
+        <div class="overlay-gradient"></div>
+        <div class="hero-inner">
+            <h1>Events & Family</h1>
+            <span>Togetherness</span>
+        </div>
+    </header>
+
+    <section class="story-intro">
+        <div class="container">
+            <h2>Family Milestones</h2>
+            <h5>Birthdays & Gatherings</h5>
+            <p>Documenting the joy, chaotic fun, and precious life milestones. From spectacular 1st birthday parties to grand family reunions, we capture the magical moments that define family ties.</p>
+        </div>
+    </section>
+
+    <section class="story-grid-wrapper">
+        <div class="story-grid">
+            <div class="story-item big">
+                <a href="../img/blog/grid_evt_1.png" data-fancybox="events" data-caption="Family Celebration">
+                    <div class="story-img-wrap"><img src="../img/blog/grid_evt_1.png" alt="Family Events"><span class="story-zoom-icon"><i class="fas fa-search"></i></span></div>
+                </a>
+            </div>
+            <div class="story-item wide">
+                <a href="../img/blog/s6.jpg" data-fancybox="events">
+                    <div class="story-img-wrap"><img src="../img/blog/s6.jpg" alt=""><span class="story-zoom-icon"><i class="fas fa-search"></i></span></div>
+                </a>
+            </div>
+            <div class="story-item tall">
+                <a href="../img/blog/hero_family.png" data-fancybox="events">
+                    <div class="story-img-wrap"><img src="../img/blog/hero_family.png" alt=""><span class="story-zoom-icon"><i class="fas fa-search"></i></span></div>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- CTA (reusing existing call-action styles) -->
+<section class="story-cta-minimal">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8 mb-3 mb-lg-0">
+        <h3>Ready to plan your own story?</h3>
+        <p>Share your dates and venue details and PV Delight Pix will suggest a photography plan tailored to your celebration.</p>
+      </div>
+      <div class="col-lg-4 text-lg-right">
+        <a href="contact-us.html" class="story-cta-btn">Enquire Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+/* Minimal CTA – like reference screenshot */
+.story-cta-minimal {
+    padding: 60px 0;
+    background: #ffffff;
+}
+.story-cta-minimal h3 {
+    font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+.story-cta-minimal p {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 0;
+}
+.story-cta-btn {
+    display: inline-block;
+    padding: 16px 42px;
+    background: #b89368;          /* warm beige */
+    color: #ffffff;
+    font-size: 13px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    border-radius: 0;
+    text-decoration: none;
+    transition: background .2s ease, transform .2s ease;
+}
+.story-cta-btn:hover {
+    background: #a17e50;
+    transform: translateY(-1px);
+}
+</style>
+
+<!-- Footer (reuse global footer) -->
+
+<footer class="main-footer dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="item abot">
+                    <div class="logo-footer mb-20">
+                        <a href="#0" class="logo">
+                            <img src="img/pv_delight_pix-logo.jpg" style="width: 155px;" alt="footerLogo">
+                        </a>
+                    </div>
+                    <div class="social-icon">
+                        <a href="https://www.facebook.com/pvdelightpics/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.youtube.com/@pvdelightpix6354" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/pvdelightpix/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="item usful-links">
+                    <div class="fothead">
+                        <h6>Useful Links</h6>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-chevron-right"></i> <a href="../shoot/wedding-shoot.html">Wedding Photography</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="../shoot/pre-wedding-shoot.html">Pre Wedding</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="../shoot/engagement-shoot.html">Engagement Photoshoot</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="../shoot/maternity-shoot.html">Maternity Shoot</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="../shoot/event-photography-shoot.html">Event Photography</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="item usful-links">
+                   
+                    <div class="item usful-links">
+                    <div class="fothead">
+                        <h6>Contact Us</h6>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-chevron-right"></i> <a href="tel:9677992818">Mobile No  : +91 9677992818 </a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="tel:9677992818">Mobile No  : +91 9677992818</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="mailto:pvdelightpix@gmail.com">Mail Us : pvdelightpix@gmail.com</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="#0">Address : A.Complex, Govt. Arts College, N.M, Salem Main Rd, Dharmapuri, Tamil Nadu 636705.</a></li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="text-center" style="margin-bottom:0px;"> <a href="#" target="blank" style="color:#FFF;pointer-events: none;">© 2025 PV DELIGHT PIX. All Rights Reserved</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Scripts -->
+<script src="../js/jquery-3.0.0.min.js"></script>
+<script src="../js/jquery-migrate-3.0.0.min.js"></script>
+<script src="../js/plugins.js"></script>
+<script src="../js/scripts.js"></script>
+
+<!-- Fancybox JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+<script>
+    // Initialize all fancybox instances
+    // We bind to all data-fancybox attributes to ensure our dynamic event grids are covered.
+    $('[data-fancybox]').fancybox({
+        loop: true,
+        animationEffect: "zoom-in-out",
+        transitionEffect: "fade",
+        
+        // Prevent URL hash manipulation which can cause "multiple clicks to close" / history issues
+        hash: false,
+
+        // Ensure clicking anywhere near the image or overlay closes the modal
+        clickSlide: "close",
+        clickOutside: "close",
+        clickContent: "close",
+
+        // Mobile / swipe configuration (sometimes swipe blocks next/prev buttons on touch screens)
+        touch: {
+            vertical: false,  // Allow vertical scroll 
+            momentum: false   // Don't bounce
+        },
+        
+        // Explicit layout
+        buttons: [
+            "zoom",
+            "slideShow",
+            "fullScreen",
+            "download",
+            "thumbs",
+            "close"
+        ]
+    });
+</script>
+
+</body>
+</html>
