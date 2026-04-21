@@ -470,6 +470,9 @@ $(document).ready(function () {
     "use strict";
 
     var progressPath = document.querySelector('.progress-wrap path');
+    if (!progressPath) {
+        return;
+    }
     var pathLength = progressPath.getTotalLength();
     progressPath.style.transition = progressPath.style.WebkitTransition = 'none';
     progressPath.style.strokeDasharray = pathLength + ' ' + pathLength;

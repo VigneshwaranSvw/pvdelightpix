@@ -1,0 +1,5 @@
+scratch*.js
+scratch.html
+*.zip
+.vercel
+.env

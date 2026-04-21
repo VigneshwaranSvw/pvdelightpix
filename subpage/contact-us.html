@@ -10,7 +10,11 @@
   <meta name="description" content="Contact PV Delight Pix for wedding, pre-wedding, maternity, baby and family photography bookings in Dharmapuri and across Tamil Nadu." />
   <meta name="author" content="PV Delight Pix" />
 
-  <link rel="shortcut icon" href="../img/fav.png" />
+  <link rel="icon" type="image/png" href="../img/fav-icon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="../img/fav-icon/favicon.svg" />
+  <link rel="shortcut icon" href="../img/fav-icon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/fav-icon/apple-touch-icon.png" />
+  <link rel="manifest" href="../img/fav-icon/site.webmanifest" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/plugins.css" />
   <link rel="stylesheet" href="../css/style.css" />
@@ -295,7 +299,7 @@ body {
 </section>
 
 <!-- Form + Why choose us -->
-<section class="contact-form-section">
+<section class="contact-form-section" id="contact-form-section">
   <div class="container">
     <div class="row">
       <!-- Form -->
@@ -307,11 +311,12 @@ body {
             respond with curated package options.
           </p>
 
-          <form id="contact-form" method="post" action="#" novalidate>
+          <form id="contact-form" method="post" action="https://wa.me/919677992818" novalidate>
             <div class="form-row">
               <div class="form-group col-12">
                 <label class="contact-form-label" for="name">Name</label>
                 <input type="text" id="name" name="name" class="form-control contact-input"
+                       autocomplete="name"
                        placeholder="Your full name" required>
               </div>
             </div>
@@ -320,6 +325,7 @@ body {
               <div class="form-group col-12">
                 <label class="contact-form-label" for="phone">Phone / WhatsApp</label>
                 <input type="tel" id="phone" name="phone" class="form-control contact-input"
+                       autocomplete="tel" inputmode="tel" pattern="[0-9+\-\s()]{10,}"
                        placeholder="+91-" required>
               </div>
             </div>
@@ -340,7 +346,7 @@ body {
               </div>
             </div>
 
-            <div id="form-message" style="display:none; color: #d9534f; font-size: 14px; margin-bottom: 15px; text-align: center;"></div>
+            <div id="form-message" role="status" aria-live="polite" style="display:none; color: #d9534f; font-size: 14px; margin-bottom: 15px; text-align: center;"></div>
 
             <button type="submit" class="contact-submit-btn contact-submit-btn-full">
               Submit enquiry
@@ -395,7 +401,7 @@ body {
                         <li><i class="fas fa-chevron-right"></i> <a href="../shoot/pre-wedding-shoot.html">Pre Wedding</a></li>
                         <li><i class="fas fa-chevron-right"></i> <a href="../shoot/engagement-shoot.html">Engagement Photoshoot</a></li>
                         <li><i class="fas fa-chevron-right"></i> <a href="../shoot/maternity-shoot.html">Maternity Shoot</a></li>
-                        <li><i class="fas fa-chevron-right"></i> <a href="../shoot/event-photography-shoot.html">Event Photography</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="../shoot/best-studio.html">Event Photography</a></li>
                     </ul>
                 </div>
             </div>
@@ -421,7 +427,7 @@ body {
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <p class="text-center" style="margin-bottom:0px;"> <a href="#" target="blank" style="color:#FFF;pointer-events: none;">© 2025 PV DELIGHT PIX. All Rights Reserved</a>
+                    <p class="text-center" style="margin-bottom:0px;"> <a href="#" target="blank" style="color:#FFF;pointer-events: none;">© 2026 PV DELIGHT PIX. All Rights Reserved</a>
                     </p>
                 </div>
             </div>
@@ -436,12 +442,30 @@ body {
 <script src="../js/scripts.js"></script>
 
 <script>
-  // Web3Forms API script + WhatsApp integration
-  document.getElementById('contact-form').addEventListener('submit', async function(e) {
-    e.preventDefault(); // Prevent standard form submission
+  // Sends email through the Vercel backend, then opens WhatsApp with the same enquiry.
+  var contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+  var queryParams = new URLSearchParams(window.location.search);
+  var prefillType = queryParams.get('type');
+  var prefillDetails = queryParams.get('details');
+  if (prefillType) {
+    document.getElementById('type').value = prefillType;
+  }
+  if (prefillDetails) {
+    document.getElementById('details').value = prefillDetails;
+  }
+  if ((prefillType || prefillDetails) && window.location.hash === '#contact-form-section') {
+    setTimeout(function() {
+      contactForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 250);
+  }
+
+  contactForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
 
     var formMessage = document.getElementById('form-message');
     formMessage.style.display = 'none';
+    formMessage.style.color = '#d9534f';
 
     // Get form values
     var name = document.getElementById('name').value.trim();
@@ -464,45 +488,12 @@ body {
         return;
     }
 
-    // Visual button feedback
     var submitBtn = document.querySelector('.contact-submit-btn');
     var originalBtnText = submitBtn.innerText;
-    submitBtn.innerText = 'Processing...';
+    submitBtn.innerText = 'Sending...';
     submitBtn.disabled = true;
 
-    // ----- 1. EMAIL SUBMISSION (Web3Forms) -----
-    // IMPORTANT: Replace the string below with your Web3Forms access key
-    var web3formsAccessKey = "YOUR_ACCESS_KEY_HERE";
-    
-    // Only attempt email if key is provided
-    if (web3formsAccessKey !== "YOUR_ACCESS_KEY_HERE") {
-        try {
-            await fetch("https://api.web3forms.com/submit", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify({
-                    access_key: web3formsAccessKey,
-                    subject: "New Website Enquiry from " + name,
-                    from_name: name,
-                    phone: phone,
-                    "Type of Shoot": type,
-                    details: details
-                })
-            });
-            console.log("Email sent successfully!");
-        } catch (error) {
-            console.error("Email send failed:", error);
-        }
-    } else {
-        console.warn("Skipping email submission: Web3Forms access key is not set.");
-    }
-
-    // ----- 2. WHATSAPP PORTION -----
     var waNumber = "919677992818"; 
-    
     var message = "Hello PV Delight Pix!\n\nI would like to plan a shoot.\n\n" +
                   "*Name:* " + name + "\n" +
                   "*Phone / WhatsApp:* " + phone + "\n" +
@@ -510,13 +501,56 @@ body {
                   "*Details:* " + details;
 
     var waUrl = "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(message);
-    window.open(waUrl, '_blank');
+    var whatsappWindow = window.open(waUrl, '_blank');
+    var whatsappOpened = !!whatsappWindow;
+    if (!whatsappOpened) {
+        formMessage.innerHTML = 'WhatsApp could not open automatically. <a href="' + waUrl + '" target="_blank" rel="noopener">Click here to open WhatsApp</a>.';
+        formMessage.style.display = 'block';
+    }
 
-    // Reset button and form
+    var emailSent = false;
+    var emailMessage = '';
+    try {
+        var response = await fetch("/api/contact", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                phone: phone,
+                type: type,
+                details: details
+            })
+        });
+
+        var responseText = await response.text();
+        var data = {};
+        try {
+            data = responseText ? JSON.parse(responseText) : {};
+        } catch (parseError) {
+            data = {};
+        }
+        if (!response.ok) {
+            throw new Error(data.message || "Email failed to send.");
+        }
+        emailSent = true;
+        emailMessage = 'Email sent successfully.';
+    } catch (error) {
+        emailMessage = error.message || 'Email failed to send.';
+    }
+
+    formMessage.innerHTML = emailMessage + (whatsappOpened
+        ? ' WhatsApp opened with your enquiry details.'
+        : ' <a href="' + waUrl + '" target="_blank" rel="noopener">Click here to open WhatsApp</a> and send the enquiry.');
+    formMessage.style.color = emailSent ? '#198754' : '#d9534f';
+    formMessage.style.display = 'block';
     submitBtn.innerText = originalBtnText;
     submitBtn.disabled = false;
     document.getElementById('contact-form').reset();
   });
+  }
 </script>
 
 </body>

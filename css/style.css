@@ -908,6 +908,7 @@ span:hover {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    display: none !important;
     z-index: 99999999999999;
     position: fixed;
     margin: auto;
@@ -926,6 +927,7 @@ span:hover {
 }
 
 .pace .pace-progress {
+    display: none !important;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     max-width: 300px;
