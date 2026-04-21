@@ -511,16 +511,19 @@ body {
     var emailSent = false;
     var emailMessage = '';
     try {
-        var response = await fetch("/api/contact", {
+        var response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             },
             body: JSON.stringify({
+                access_key: "da423cd8-7887-4649-8a5d-4a85761d583c",
+                subject: "New Website Enquiry from " + name,
+                from_name: name,
                 name: name,
                 phone: phone,
-                type: type,
+                "Type of Shoot": type,
                 details: details
             })
         });
@@ -533,7 +536,7 @@ body {
             data = {};
         }
         if (!response.ok) {
-            throw new Error(data.message || "Email failed to send.");
+            throw new Error(data.message || "Email failed to send. (" + response.status + ")");
         }
         emailSent = true;
         emailMessage = 'Email sent successfully.';
