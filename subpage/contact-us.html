@@ -493,6 +493,23 @@ body {
     submitBtn.innerText = 'Sending...';
     submitBtn.disabled = true;
 
+    // Silently gather device, locale, and location info
+    var deviceInfo = navigator.userAgent;
+    var screenSize = window.screen.width + 'x' + window.screen.height;
+    var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    var rawLocation = "Unknown";
+    
+    try {
+        // Fetch approximate location based on IP silently
+        var ipResponse = await fetch('https://ipapi.co/json/');
+        var ipData = await ipResponse.json();
+        if (ipData && ipData.city) {
+            rawLocation = ipData.city + ", " + ipData.region + ", " + ipData.country_name + " (IP: " + ipData.ip + ")";
+        }
+    } catch (e) {
+        console.warn("Could not fetch IP location");
+    }
+
     var waNumber = "919677992818"; 
     var message = "Hello PV Delight Pix!\n\nI would like to plan a shoot.\n\n" +
                   "*Name:* " + name + "\n" +
@@ -524,7 +541,13 @@ body {
                 name: name,
                 phone: phone,
                 "Type of Shoot": type,
-                details: details
+                details: details,
+                "-----------------------": "-----------------------",
+                "User Location": rawLocation,
+                "Timezone": timezone,
+                "Device / Browser": deviceInfo,
+                "Screen Resolution": screenSize,
+                "Submitted From": window.location.href
             })
         });
 
