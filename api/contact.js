@@ -39,11 +39,18 @@ module.exports = async function handler(req, res) {
       }),
     });
 
-    const data = await response.json();
+    const responseText = await response.text();
+    let data = {};
+    try {
+      data = JSON.parse(responseText);
+    } catch (e) {
+      console.error("Web3Forms response is not JSON:", responseText);
+    }
+
     if (!response.ok) {
       return res.status(response.status).json({
         success: false,
-        message: data.message || "Unable to send enquiry.",
+        message: data.message || "Web3Forms API Error: " + response.status,
       });
     }
 
@@ -52,9 +59,10 @@ module.exports = async function handler(req, res) {
       message: "Email sent successfully.",
     });
   } catch (error) {
+    console.error("Vercel Serverless Error:", error);
     return res.status(500).json({
       success: false,
-      message: "Something went wrong. Please try again.",
+      message: error.message || "Something went wrong locally.",
     });
   }
 };
