@@ -562,3 +562,47 @@ function mousecursor() {
 $(function () {
     mousecursor();
 });
+
+/* ===============================  Marketing Tracker  =============================== */
+// Silently tracks visitor behavior to provide better context on form submissions
+try {
+    var pvdTracker = {
+        save: function(key, val) { localStorage.setItem('pvd_' + key, val); },
+        get: function(key) { return localStorage.getItem('pvd_' + key); }
+    };
+    
+    // 1. Visit Count & Source
+    if (!pvdTracker.get('firstVisit')) {
+        pvdTracker.save('firstVisit', new Date().toISOString());
+        pvdTracker.save('visitCount', '1');
+        
+        var urlParams = new URLSearchParams(window.location.search);
+        var src = urlParams.get('utm_source') || urlParams.get('source');
+        if (!src && document.referrer && !document.referrer.includes(window.location.hostname)) {
+            src = new URL(document.referrer).hostname;
+        }
+        pvdTracker.save('source', src || 'Direct / Organic');
+    } else {
+        if (!sessionStorage.getItem('pvd_session')) {
+            var counts = parseInt(pvdTracker.get('visitCount') || '1') + 1;
+            pvdTracker.save('visitCount', counts.toString());
+        }
+    }
+    
+    // 2. Session Time
+    if (!sessionStorage.getItem('pvd_session')) {
+        sessionStorage.setItem('pvd_session', new Date().getTime().toString());
+    }
+
+    // 3. Page History
+    var historyArr = pvdTracker.get('history') ? JSON.parse(pvdTracker.get('history')) : [];
+    // Clean up document title
+    var pageName = document.title.split('|')[0].trim();
+    if (pageName === "") pageName = "Home";
+    
+    if (historyArr.length === 0 || historyArr[historyArr.length - 1] !== pageName) {
+        historyArr.push(pageName);
+        if (historyArr.length > 5) historyArr.shift(); // Keep last 5
+        pvdTracker.save('history', JSON.stringify(historyArr));
+    }
+} catch(e) {}

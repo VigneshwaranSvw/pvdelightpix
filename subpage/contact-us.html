@@ -493,22 +493,33 @@ body {
     submitBtn.innerText = 'Sending...';
     submitBtn.disabled = true;
 
-    // Silently gather device, locale, and location info
-    var deviceInfo = navigator.userAgent;
-    var screenSize = window.screen.width + 'x' + window.screen.height;
-    var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    var rawLocation = "Unknown";
+    // Silently gather marketing and behavioral context
+    var leadSource = 'Direct / Unknown';
+    var visitType = 'First-Time Visitor';
+    var pageHistory = 'Direct to Contact';
+    var timeOnSite = 'Unknown';
     
     try {
-        // Fetch approximate location based on IP silently
-        var ipResponse = await fetch('https://ipapi.co/json/');
-        var ipData = await ipResponse.json();
-        if (ipData && ipData.city) {
-            rawLocation = ipData.city + ", " + ipData.region + ", " + ipData.country_name + " (IP: " + ipData.ip + ")";
+        leadSource = localStorage.getItem('pvd_source') || 'Direct / Organic';
+        var visits = parseInt(localStorage.getItem('pvd_visitCount') || '1');
+        if (visits > 1) {
+            visitType = "Returning Visitor (Visit #" + visits + ")";
         }
-    } catch (e) {
-        console.warn("Could not fetch IP location");
-    }
+        
+        var hist = localStorage.getItem('pvd_history');
+        if (hist) {
+            var parsedHist = JSON.parse(hist);
+            pageHistory = parsedHist.join(' > ');
+        }
+        
+        var startSession = sessionStorage.getItem('pvd_session');
+        if (startSession) {
+            var diffSeconds = Math.floor((new Date().getTime() - parseInt(startSession)) / 1000);
+            var mins = Math.floor(diffSeconds / 60);
+            var secs = diffSeconds % 60;
+            timeOnSite = mins > 0 ? (mins + "m " + secs + "s") : (secs + "s");
+        }
+    } catch (e) { }
 
     var waNumber = "919677992818"; 
     var message = "Hello PV Delight Pix!\n\nI would like to plan a shoot.\n\n" +
@@ -543,11 +554,10 @@ body {
                 "Type of Shoot": type,
                 details: details,
                 "-----------------------": "-----------------------",
-                "User Location": rawLocation,
-                "Timezone": timezone,
-                "Device / Browser": deviceInfo,
-                "Screen Resolution": screenSize,
-                "Submitted From": window.location.href
+                "Lead Source": leadSource,
+                "Visitor Type": visitType,
+                "Time Spent Browsing": timeOnSite,
+                "Pages Viewed": pageHistory
             })
         });
 
